@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <#include "/front/_header.html"/>
+
+    <script>
+        $(function () {
+            // body...
+            $('.flexslider').flexslider({
+                animation: "fade",
+                auto: "true",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            })
+
+
+        })
+    </script>
+
+
+</head>
+<body>
+<!-- Head Begin -->
+<#include "/front/_nav.html"/>
+<!-- Head end -->
+
+<!-- Slide Begin -->
+<div class="flexslider">
+    <ul class="slides">
+
+
+        <li><a href="products.aspx" style="background-image:url()"><img src="/Upload/homebannar/pic_4-15183876323.jpg" alt=""></a></li>
+
+
+        <li><a href="products.aspx" style="background-image:url()"><img src="/Upload/homebannar/pic_64-11252879607.jpg" alt=""></a></li>
+
+
+        <li><a href="products.aspx" style="background-image:url()"><img src="/Upload/homebannar/pic_2-17052291918.jpg" alt=""></a></li>
+
+
+        <li><a href="products.aspx" style="background-image:url()"><img src="/Upload/homebannar/pic_4-17064712775.jpg" alt=""></a></li>
+
+
+        <li><a href="products.aspx" style="background-image:url()"><img src="/Upload/homebannar/pic_21-14520855658.jpg" alt=""></a></li>
+
+
+    </ul>
+</div>
+<!-- Slide End -->
+
+<!-- Section Begin -->
+<div class="sec--1">
+    <div class="main">
+        <div class="link">
+
+
+            <a href="about.aspx" class="link-item--1">
+                <div class="link-item-front">
+                    <div class="link-item-txt">
+                        <i></i>
+                        <h3>关于我们</h3>
+                        <p> 用心智造 完美体验</p>
+                    </div>
+                </div>
+                <div class="link-item-back" style="background-image:url(/Upload/catebannar/pic_1-16542494206.jpg)">
+                    <div class="link-item-txt">
+                        <h3>关于我们<i></i></h3><span></span>
+                        <p>用心智造 完美体验</p>
+                    </div>
+                    <div class="link-item-filt"></div>
+                </div>
+            </a>
+
+
+            <a href="products.aspx" class="link-item--2">
+                <div class="link-item-front">
+                    <div class="link-item-txt">
+                        <i></i>
+                        <h3>产品中心</h3>
+                        <p> 品质，三十年不变的经典</p>
+                    </div>
+                </div>
+                <div class="link-item-back" style="background-image:url(/Upload/catebannar/pic_2-16531549355.jpg)">
+                    <div class="link-item-txt">
+                        <h3>产品中心<i></i></h3><span></span>
+                        <p>品质，三十年不变的经典</p>
+                    </div>
+                    <div class="link-item-filt"></div>
+                </div>
+            </a>
+
+
+            <a href="news.aspx" class="link-item--3">
+                <div class="link-item-front">
+                    <div class="link-item-txt">
+                        <i></i>
+                        <h3>新闻中心</h3>
+                        <p> 与时俱进 开拓创新</p>
+                    </div>
+                </div>
+                <div class="link-item-back" style="background-image:url(/Upload/catebannar/pic_3-16510074719.jpg)">
+                    <div class="link-item-txt">
+                        <h3>新闻中心<i></i></h3><span></span>
+                        <p>与时俱进 开拓创新</p>
+                    </div>
+                    <div class="link-item-filt"></div>
+                </div>
+            </a>
+
+
+        </div>
+    </div>
+</div>
+<!-- Section End -->
+
+<#include "/front/_foot.html"/>
+
+</body>
+</html>

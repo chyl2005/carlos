@@ -54,17 +54,7 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
-    <!--分页过滤器-->
-    <filter>
-        <filter-name>pageFilter</filter-name>
-        <filter-class>com.github.novel.filter.PageFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>pageFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-    </filter-mapping>
+
 
 
     <servlet>

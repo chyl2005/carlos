@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/vue-resource.js"></script>
+</head>
+<body>
+<div id="table">
+
+    <user-table>
+
+    </user-table>
+</div>
+</body>
+
+
+<!-- template for the modal component -->
+<script type="text/x-template" id="table-template">
+    <table id="simple-table" class="table  table-bordered table-hover">
+        <thead>
+        <tr>
+            <th class="center">
+                <label class="pos-rel">
+                    <input type="checkbox" class="ace">
+                    <span class="lbl"></span>
+                </label>
+            </th>
+            <th>账号</th>
+            <th>姓名</th>
+            <th class="hidden-480">角色</th>
+
+            <th>
+                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                注册时间
+            </th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        <tr v-for="item in userList">
+            <td class="center">
+                <label class="pos-rel">
+                    <input type="checkbox" class="ace">
+                    <span class="lbl"></span>
+                </label>
+            </td>
+            <td> {{item.userName}}</td>
+            <td>{{item.userName}}</td>
+            <td class="hidden-480">{{item.userName}}</td>
+            <td>{{item.userName}}</td>
+            <td>{{item.userName}}</td>
+
+            <td>
+                <div class="hidden-sm hidden-xs btn-group">
+                    <button class="btn btn-xs btn-success">
+                        <i class="ace-icon fa fa-check bigger-120"></i>
+                    </button>
+
+                    <button class="btn btn-xs btn-info">
+                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </button>
+
+                    <button class="btn btn-xs btn-danger">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button>
+
+                    <button class="btn btn-xs btn-warning">
+                        <i class="ace-icon fa fa-flag bigger-120"></i>
+                    </button>
+                </div>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+
+
+<script>
+    Vue.component('user-table', {
+        template: '#table-template',
+        data: function () {
+            return {
+                userList: [
+                    {userName: 'Chuck Norris', power: Infinity},
+                    {userName: 'Bruce Lee', power: 9000},
+                    {userName: 'Jackie Chan', power: 7000},
+                    {userName: 'Jet Li', power: 8000}
+                ]
+            }
+        }
+    })
+
+    // start app
+    new Vue({
+        el: '#table'
+    })
+
+</script>
+
+
+</html>

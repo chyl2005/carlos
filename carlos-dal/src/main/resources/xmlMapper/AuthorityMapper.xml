@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.carlos.dal.mapper.AuthorityMapper">
+    <resultMap id="resultMap" type="com.github.carlos.dal.bean.AuthorityDO">
+
+        <id column="id" property="id"/>
+        <result column="role_id" property="roleId"/>
+        <result column="menu_id" property="menuId"/>
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="is_del" property="isDel"/>
+    </resultMap>
+
+    <sql id="generalColumns">
+        id,
+        role_id,
+        menu_id,
+        gmt_created,
+        gmt_modified,
+        is_del
+
+    </sql>
+
+    <insert id="insertOrUpdate" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_auth (<include refid="generalColumns"/>)
+
+        values (#{id},
+        #{roleId},
+        #{menuId},
+        now(),
+        now(),
+        0)
+        on duplicate key update
+        <trim suffixOverrides=",">
+            role_id = VALUES(role_id),
+            menu_id = VALUES(menu_id),
+            is_del =0,
+            gmt_modified=now()
+        </trim>
+    </insert>
+
+
+
+
+    <select id="getAuthority" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from tb_auth
+        where is_del=0  and menu_id=#{menuId} and role_id=#{roleId}
+
+
+    </select>
+
+
+
+    <select id="selectByParam" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from tb_auth
+        where is_del=0
+
+        <if test="roleIds != null and !roleIds.isEmpty()">
+            and role_id IN
+            <foreach item="id" index="index" collection="roleIds" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="menuId!=null">
+            and menu_id=#{menuId}
+        </if>
+
+
+    </select>
+
+    <select id="selectByCount"  resultType="java.lang.Integer">
+        select
+        count(*) from tb_auth
+        where is_del=0
+        <if test="roleIds != null and !roleIds.isEmpty()">
+            and role_id IN
+            <foreach item="id" index="index" collection="roleIds" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="menuId!=null">
+            and menu_id=#{menuId}
+        </if>
+
+
+    </select>
+
+
+
+    <update id="delByRoleId">
+        update tb_auth set is_del= 1
+        where role_id=#{roleId}
+    </update>
+
+
+
+
+</mapper>

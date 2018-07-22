@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>联系我们</title>
+    <#include "/front/_header.html"/>
+</head>
+<body>
+
+
+<!-- Head Begin -->
+<#include "/front/_nav.html"/>
+<!-- Head end -->
+
+<!-- Banner Begin -->
+
+
+<div class="banner" style="background-image:url(/Upload/catebannar/pic_4c-16242989504.jpg)">
+    <img src="/Upload/catebannar/pic_4c-16242989504.jpg" alt="">
+</div>
+
+
+<!-- Banner End -->
+<!-- Container Begin -->
+<div class="container">
+    <div class="main">
+        <div class="crumb">你所在的位置：<a href="index.html">首页</a> >
+
+            <a href="">联系我们</a>
+
+
+        </div>
+
+        <div class="headline">
+            <div class="headline-tit"><h2>联系我们</h2></div>
+            <div class="headline-nav">
+                <a href="" class="current">联系我们</a>
+            </div>
+        </div>
+        <div class="contact-cont">
+            <div class="contact-info">
+
+                <p>联系人：胡小姐</p><p>电 &nbsp;话：0575-88519250</p><p>传 &nbsp;真：0575-84600566</p><p>地 &nbsp;址：浙江省绍兴县兰亭工业园区亭四路</p>
+
+
+            </div>
+            <div class="contact-map">
+
+
+                <p><iframe class="ueditor_baidumap" src="/ueditor/dialogs/map/show.html#center=120.514126,29.996113&amp;zoom=16&amp;width=1200&amp;height=340&amp;markers=120.51515,29.995988&amp;markerStyles=l,A" frameborder="0" width="1200" height="344"></iframe></p>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container End -->
+
+<#include "/front/_foot.html"/>
+
+
+<script>
+    $(function () {
+        // body...
+        $("#city_4").citySelect({
+            prov:"湖南",
+            city:"长沙",
+            nodata:"none"
+        });
+
+    })
+</script>
+
+</body>
+</html>

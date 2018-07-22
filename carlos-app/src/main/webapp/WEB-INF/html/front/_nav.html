@@ -1,0 +1,71 @@
+
+
+
+<!-- Head Begin -->
+<div class="head">
+    <div class="main">
+        <h1 class="logo-wrap">
+            <div class="logo--1">
+                <a href="index.html"><span class="logo-ico"></span>Cameron</a>
+            </div>
+            <div class="logo--2">
+                <a href="index.html"></a>
+            </div>
+        </h1>
+        <ul class="oper">
+            <li class="oper-item--toggle"><a><i></i></a></li>
+
+            <script language="JavaScript" type="text/javascript">
+                function search_OnSubmit() {
+                    var KeyWord = get("KeyWord").value;
+                    if (KeyWord.length < 1) {
+                        alert("搜索关键词");
+                        return false;
+                    }
+                }
+            </script>
+            <li class="oper-item--search">
+
+                <form style="margin:0px;padding:0px;" action="/searchlist.aspx" method="get" onsubmit="javascript:return search_OnSubmit(this);">
+
+                    <button class="search-btn"></button>
+
+                    <input name="KeyWord" type="text" class="search-ipt" id="KeyWord" onfocus="if (this.value=='搜索关键词') this.value='';" onblur="if (this.value=='') this.value='搜索关键词';" value=" "
+                           style="" placeholder="搜索关键词"/>
+
+                </form>
+
+
+            </li>
+            <li class="oper-item--search2"><a href=""><i></i></a></li>
+            <li class="oper-item--memb"><a href="/en/index.html"><i></i></a></li>
+        </ul>
+        <!-- Nav Begin -->
+        <div class="nav">
+            <a href="index.aspx">
+                <span class="nav-item-txt">首 页</span>
+                <span class="nav-item-bg"></span>
+            </a>
+            <a href="about.aspx?aboutidx=69">
+                <span class="nav-item-txt">关于我们</span>
+                <span class="nav-item-bg"></span>
+            </a>
+            <a href="products.aspx">
+                <span class="nav-item-txt">产品中心</span>
+                <span class="nav-item-bg"></span>
+            </a>
+            <a href="news.aspx?aboutidx=77">
+                <span class="nav-item-txt">新闻中心</span>
+                <span class="nav-item-bg"></span>
+            </a>
+
+            <a href="contact.aspx">
+                <span class="nav-item-txt">联系我们</span>
+                <span class="nav-item-bg"></span>
+            </a>
+        </div>
+        <!-- Nav End -->
+    </div>
+</div>
+<div class="head-plh"></div>
+<!-- Head End -->

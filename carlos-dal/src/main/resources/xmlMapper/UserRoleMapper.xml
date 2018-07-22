@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.carlos.dal.mapper.UserRoleMapper">
+    <resultMap id="resultMap" type="com.github.carlos.dal.bean.UserRoleDO">
+
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="is_del" property="isDel"/>
+    </resultMap>
+
+    <sql id="generalColumns">
+        id,
+        user_id,
+        role_id,
+        gmt_created,
+        gmt_modified,
+        is_del
+
+    </sql>
+
+    <insert id="insertOrUpdate" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_user_role (<include refid="generalColumns"/>)
+
+        values (#{id},
+        #{userId},
+        #{roleId},
+        now(),
+        now(),
+        0)
+        on duplicate key update
+        <trim suffixOverrides=",">
+            user_id = VALUES(user_id),
+            role_id = VALUES(role_id),
+            is_del =0,
+            gmt_modified=now()
+        </trim>
+    </insert>
+
+    <select id="findByUserIds" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from tb_user_role
+        where is_del =0
+        <if test="userIds != null and !userIds.isEmpty()">
+            and user_id IN
+            <foreach item="id" index="index" collection="userIds" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id="getUserRole" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from tb_user_role
+        where is_del =0 and and user_id = #{userId}
+
+    </select>
+
+
+    <update id="deleteByUserIdAndRoleId" >
+       update tb_user_role set is_del=1
+        where
+         user_id = #{userId}
+        and role_id = #{roleId}
+
+    </update>
+
+
+
+
+
+
+
+
+
+</mapper>

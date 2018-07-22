@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.carlos.dal.mapper.MenuMapper">
+    <resultMap id="resultMap" type="com.github.carlos.dal.bean.MenuDO">
+
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="path" property="path"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="icon" property="icon"/>
+        <result column="level" property="level"/>
+        <result column="is_link" property="isLink"/>
+
+
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="is_del" property="isDel"/>
+    </resultMap>
+
+    <sql id="generalColumns">
+        id,
+        `name`,
+        url,
+        path,
+        parent_id,
+        icon,
+        `level`,
+        is_link,
+        gmt_created,
+        gmt_modified,
+        is_del
+
+    </sql>
+
+    <insert id="insertOrUpdate" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_menu (<include refid="generalColumns"/>)
+
+        values (#{id},
+        #{name},
+        #{url},
+        #{path},
+        #{parentId},
+        #{icon},
+        #{level},
+        #{isLink},
+        now(),
+        now(),
+        0)
+        on duplicate key update
+        <trim suffixOverrides=",">
+            `name` = VALUES(`name`),
+            url = VALUES(url),
+            path = VALUES(path),
+            parent_id = VALUES(parent_id),
+            `level` = VALUES(`level`),
+            is_link = VALUES(is_link),
+            icon = VALUES(icon),
+            is_del =0,
+            gmt_modified=now()
+        </trim>
+    </insert>
+
+    <select id="findById" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from tb_menu
+        where id=#{id}
+
+    </select>
+
+
+    <select id="selectAll" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from tb_menu
+        where is_del=0
+    </select>
+
+    <select id="selectByParam" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from tb_menu
+        where is_del=0
+
+        <if test="ids != null and !ids.isEmpty()">
+            and id IN
+            <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="parentId!=null">
+            and parent_id=#{parentId}
+        </if>
+        <if test="level!=null">
+            and `level` = #{level}
+
+        </if>
+        <if test="path!=null">
+            and path = #{path}
+        </if>
+
+
+    </select>
+
+    <select id="selectByCount" resultType="java.lang.Integer">
+        select
+        count(*) from tb_menu
+        where is_del=0
+
+        <if test="ids != null and !ids.isEmpty()">
+            and id IN
+            <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="parentId!=null">
+            and parent_id=#{parentId}
+        </if>
+        <if test="level!=null">
+            and `level` = #{level}
+
+        </if>
+        <if test="path!=null">
+            and path = #{path}
+        </if>
+    </select>
+
+
+
+    <update id="updateStatus">
+        update tb_user set is_del= #{isDel}
+        where id=#{id}
+    </update>
+
+
+
+
+</mapper>

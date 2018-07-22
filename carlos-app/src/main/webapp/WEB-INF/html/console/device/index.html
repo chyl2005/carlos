@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>设备管理-设备列表</title>
+    <meta name="description" content="overview &amp; stats"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <#include "/common/_header.html"/>
+</head>
+
+<body class="no-skin">
+
+<#include "/common/_navbar.html"/>
+<div class="main-container ace-save-state" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
+
+    <#include "/common/_sidebar.html"/>
+
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <!--breadcrumb start-->
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="active">Dashboard</li>
+                </ul><!-- /.breadcrumb end-->
+
+            </div>
+
+            <div class="page-content">
+                <#include "/common/_settings.html"/>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <#include "/common/_tips.html"/>
+
+                        <div class="page-content-area">
+
+                            <!--<div class="row">-->
+
+                            <!--<div class="col-xs-12 ">-->
+                            <!--<button type="button" onclick="saveOrUpdateDialog(this)" class="btn btn-primary">添加</button>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <div class="space-4"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <table id="simple-table" class="table  table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="center">设备ID</th>
+                                            <th class="center">设备号</th>
+                                            <th class="center">硬件编号</th>
+                                            <th class="center">城市</th>
+                                            <th class="center">省份</th>
+                                            <th class="center">当前客户端IP</th>
+                                            <th class="center">
+                                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                                创建时间
+                                            </th>
+                                            <th class="center">
+                                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                                修改时间
+                                            </th>
+
+                                            <th class="center">是否在线</th>
+                                            <th class="center">操作</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="lists">
+                                        </tbody>
+
+                                        <tbody id="template" style="display: none">
+                                        <tr>
+                                            <td class="center" id="deviceId"></td>
+                                            <td id="serialNum" class="center"></td>
+                                            <td id="deviceNum" class="center"></td>
+                                            <td id="cityName" class="center"></td>
+                                            <td id="provinceName" class="center"></td>
+                                            <td id="ip" class="center"></td>
+                                            <td id="gmtCreated" class="center"></td>
+                                            <td id="gmtModified" class="center"></td>
+                                            <td class="center">
+                                                <label>
+                                                    <input name="online" class="ace ace-switch ace-switch-2" type="checkbox">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                            <td class="center">
+                                                <div class="hidden-sm hidden-xs btn-group">
+
+
+                                                    <button class="btn btn-xs btn-info edit">
+                                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                    </button>
+
+                                                    <!--<button class="btn btn-xs btn-info config">-->
+                                                    <!--<i class="ace-icon fa fa-cog bigger-120"></i>-->
+                                                    <!--</button>-->
+
+                                                    <!--<button class="btn btn-xs btn-danger del">-->
+                                                    <!--<i class="ace-icon fa fa-trash-o bigger-120"></i>-->
+                                                    <!--</button>-->
+
+                                                    <button class="btn btn-xs btn-success chart">
+                                                        <i class="ace-icon fa fa-line-chart bigger-120"></i>
+                                                    </button>
+                                                </div>
+
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--分页-->
+                                <div class="center">
+                                    <ul id="page"></ul>
+                                </div>
+
+
+                            </div>
+
+                        </div><!-- /.page-content-area -->
+
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <#include "/common/_footer.html"/>
+</div><!-- /.main-container -->
+
+
+<div class="modal fade" tabindex="-1" id="configDialog" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger">编辑</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 ">
+                        <input type="hidden" name="deviceId" value="${deviceId}">
+                        <div class="space-4"></div>
+
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">IP: </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="IP" name="serverIp" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">端口: </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="端口" name="serverPort" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 手机号1: </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="手机号1" name="phone_num1" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 手机号2: </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="手机号2" name="phone_num2" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 传感器深度(m):</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder=" 传感器深度" name="sensorDepth" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 地表高程(m): </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="地表高程" name="surfaceHigh" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 唤醒时间1: </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="唤醒时间1" name="wakeupTime1" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 唤醒时间2: </label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="唤醒时间2" name="wakeupTime2" class="col-xs-10 col-sm-5">
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-sm" data-dismiss="modal">
+                        <i class="ace-icon fa fa-times"></i>
+                        取消
+                    </button>
+
+                    <button class="btn btn-sm btn-primary" onclick="saveOrUpdate()">
+                        <i class="ace-icon fa fa-check"></i>
+                        保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="${base}/app/device/deviceinfoList.js"></script>
+
+
+</body>
+</html>

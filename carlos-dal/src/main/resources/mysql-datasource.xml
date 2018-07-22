@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd
-	   http://www.springframework.org/schema/context
-	   http://www.springframework.org/schema/context/spring-context.xsd
+
+
 	   http://www.springframework.org/schema/tx
 	   http://www.springframework.org/schema/tx/spring-tx.xsd"
        xmlns:tx="http://www.springframework.org/schema/tx">
@@ -13,7 +12,7 @@
 
 
 
-    <context:property-placeholder location="classpath:database.properties"/>
+
 
     <!-- 【druid-慢SQL记录】  -->
     <bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4j2Filter">
@@ -80,14 +79,12 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.github.novel.dal.mapper"/>
+        <property name="basePackage" value="com.github.carlos.dal.mapper"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!-- 配置扫描Domain的包路径 -->
-        <!--<property name="typeAliasesPackage" value="com.meituan.service.hb.phoenixtree.dal"/>-->
-        <!-- 配置扫描Mapper XML的位置 -->
+
         <property name="mapperLocations">
             <array>
                 <value>classpath*:xmlMapper/*.xml</value>

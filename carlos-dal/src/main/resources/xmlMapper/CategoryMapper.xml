@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.carlos.dal.mapper.CategoryMapper">
+    <resultMap id="resultMap" type="com.github.carlos.dal.bean.CategoryDO">
+
+        <id column="id" property="id"/>
+        <result column="category_name" property="categoryName"/>
+
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="is_del" property="isDel"/>
+    </resultMap>
+
+    <sql id="generalColumns">
+        id,
+        category_name,
+        gmt_created,
+        gmt_modified,
+        is_del
+
+    </sql>
+
+    <insert id="insertOrUpdate" useGeneratedKeys="true" keyProperty="id">
+        insert into category (<include refid="generalColumns"/>)
+
+        values (#{id},
+        #{category_name},
+        now(),
+        now(),
+        0)
+        on duplicate key update
+        <trim suffixOverrides=",">
+            category_name = VALUES(category_name),
+            is_del =0,
+            gmt_modified=now()
+        </trim>
+    </insert>
+
+
+
+    <select id="selectAll" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from category
+        where is_del=0
+
+    </select>
+
+
+
+
+    <update id="del">
+       update tb_role set is_del=0
+        where
+         id = #{id}
+    </update>
+
+
+</mapper>

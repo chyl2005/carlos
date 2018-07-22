@@ -1,7 +1,7 @@
 <configuration status="info">
 
     <Properties>
-        <Property name="log_path">/opt/logs/mobile/carlos-app</Property>
+        <Property name="log_path">/opt/logs/mobile/carlos</Property>
     </Properties>
 
 

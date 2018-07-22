@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>设备管理-在线客户端</title>
+    <meta name="description" content="overview &amp; stats"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <#include "/common/_header.html"/>
+</head>
+
+<body class="no-skin">
+
+<#include "/common/_navbar.html"/>
+<div class="main-container ace-save-state" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
+
+    <#include "/common/_sidebar.html"/>
+
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <!--breadcrumb start-->
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="active">Dashboard</li>
+                </ul><!-- /.breadcrumb end-->
+
+            </div>
+
+            <div class="page-content">
+                <#include "/common/_settings.html"/>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <#include "/common/_tips.html"/>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="widget-box">
+                            <div class="widget-header">
+                                <h4 class="widget-title">Select Box</h4>
+
+                                <span class="widget-toolbar">
+														<a href="#" data-action="settings">
+															<i class="ace-icon fa fa-cog"></i>
+														</a>
+
+														<a href="#" data-action="reload">
+															<i class="ace-icon fa fa-refresh"></i>
+														</a>
+
+														<a href="#" data-action="collapse">
+															<i class="ace-icon fa fa-chevron-up"></i>
+														</a>
+
+														<a href="#" data-action="close">
+															<i class="ace-icon fa fa-times"></i>
+														</a>
+													</span>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <div>
+                                        <label for="clientlist">在线客户端</label>
+                                        <select class="form-control" id="clientlist">
+                                            <option value="">无在线</option>
+                                        </select>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <label for="command">命令</label>
+                                        <select class="form-control" id="command">
+                                        </select>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <label for="message">发送内容</label>
+                                        <textarea class="form-control limited" id="message" maxlength="100" rows="5" placeholder="查询数据：2017/07/12  或  JSON查询全部参数 或 立即进入停止模式"></textarea>
+                                    </div>
+
+                                    <hr>
+                                    <div>
+                                        <button type="button" class="btn btn-primary" onclick="sendMsg()">发送</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.span -->
+                </div>
+
+
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <#include "/common/_footer.html"/>
+</div><!-- /.main-container -->
+
+
+<script src="${base}/app/client/clientList.js"></script>
+<script src="${base}/app/check.js"></script>
+
+
+<script type="text/javascript">
+    var nowdate = new Date();
+    var y = nowdate.getFullYear();
+    var m = nowdate.getMonth() + 1;
+    var d = nowdate.getDate();
+    $('.endTime').datetimepicker({
+        format: 'YYYYMMDD',
+        showTodayButton: true,
+        showClose: true,
+        defaultDate: getFormatDate(nowdate, "yyyyMMdd")
+
+    });
+
+    nowdate.setMonth(nowdate.getMonth() - 1);
+    $('.startTime').datetimepicker({
+        format: 'YYYYMMDD',
+        showTodayButton: true,
+        showClose: true,
+        defaultDate: getFormatDate(nowdate, "yyyyMMdd")
+
+    });
+</script>
+</body>
+</html>
