@@ -29,7 +29,7 @@ import java.util.Date;
  * @date 2015年12月21日 上午10:10:09
  */
 @Controller
-@RequestMapping("/console/login")
+@RequestMapping("/console/api")
 public class LoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
@@ -64,20 +64,7 @@ public class LoginController {
             webResponse.setMessage("用户名或者密码错误！");
             return webResponse;
         }
-        //        if (StringUtils.isBlank(code)) {
-        //            WebResponse webResponse = WebResponse.getParamErrorWebResponse();
-        //            webResponse.setMessage("验证码不能为空！");
-        //            return webResponse;
-        //        }
-        // 获取验证码
-        //        String codeValue = CookieUtils.getCookieValue(request, authcode);
-        //        String md5 = MD5Utils.getMD5(code.toLowerCase());
-        //        if (!md5.equals(codeValue)) {
-        //            WebResponse webResponse = WebResponse.getParamErrorWebResponse();
-        //            webResponse.setMessage("验证码错误！");
-        //            return webResponse;
-        //        }
-        // 加密
+
         String pwd = MD5Utils.getMD5(userName + password);
         UserDO entity = this.userService.login(userName, pwd);
         if (entity == null) {

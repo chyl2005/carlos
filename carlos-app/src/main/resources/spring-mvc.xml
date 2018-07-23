@@ -60,6 +60,38 @@
     <!-- 对静态资源文件的访问 方案一 （二选一） -->
     <mvc:default-servlet-handler/>
 
+
+
+	<!--拦截器 -->
+	<mvc:interceptors>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/console/api/**"/>
+			<mvc:exclude-mapping path="/console/test/**"/>
+			<mvc:exclude-mapping path="/console/isLogin/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/doc/**"/>
+			<mvc:exclude-mapping path="/**/*.js"/>
+			<mvc:exclude-mapping path="/**/*.css"/>
+			<mvc:exclude-mapping path="/**/*.html"/>
+			<ref bean="loginInterceptor"></ref>
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/console/api/**"/>
+			<mvc:exclude-mapping path="/console/test/**"/>
+			<mvc:exclude-mapping path="/console/isLogin/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/doc/**"/>
+			<mvc:exclude-mapping path="/**/*.js"/>
+			<mvc:exclude-mapping path="/**/*.css"/>
+			<mvc:exclude-mapping path="/**/*.html"/>
+			<ref bean="checkPermissionInterceptor"></ref>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!--拦截器 -->
 <!-- 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -92,7 +124,7 @@
 	<!-- 配置freeMarker的模板路径 -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/WEB-INF/" />
+		<property name="templateLoaderPath" value="/WEB-INF/html/" />
 		<property name="freemarkerVariables">
 			<map>
 				<entry key="xml_escape" value-ref="fmXmlEscape" />

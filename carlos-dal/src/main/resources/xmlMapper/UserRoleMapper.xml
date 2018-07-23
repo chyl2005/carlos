@@ -58,7 +58,7 @@
         select
         <include refid="generalColumns"/>
         from tb_user_role
-        where is_del =0 and and user_id = #{userId}
+        where is_del =0 and  user_id = #{userId}
 
     </select>
 

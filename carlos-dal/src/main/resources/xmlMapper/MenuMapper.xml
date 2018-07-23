@@ -83,9 +83,9 @@
         from tb_menu
         where is_del=0
 
-        <if test="ids != null and !ids.isEmpty()">
+        <if test="menuIds != null and !menuIds.isEmpty()">
             and id IN
-            <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+            <foreach item="id" index="index" collection="menuIds" open="(" separator="," close=")">
                 #{id}
             </foreach>
         </if>
@@ -108,9 +108,9 @@
         count(*) from tb_menu
         where is_del=0
 
-        <if test="ids != null and !ids.isEmpty()">
+        <if test="menuIds != null and !menuIds.isEmpty()">
             and id IN
-            <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+            <foreach item="menuIds" index="index" collection="menuIds" open="(" separator="," close=")">
                 #{id}
             </foreach>
         </if>

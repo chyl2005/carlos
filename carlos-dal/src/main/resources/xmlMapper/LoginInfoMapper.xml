@@ -45,7 +45,7 @@
         select
         <include refid="generalColumns"/>
         from tb_login_info
-        where login_key=#{loginKey} is_del=0
+        where login_key=#{loginKey} and is_del=0
     </select>
 
 

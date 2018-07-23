@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'post',
-        url: rootPath + 'index/left',
+        url: rootPath + 'console/index/left',
         async: true,
         dataType: "json",
         success: function (data) {

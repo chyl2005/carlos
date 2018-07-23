@@ -1,4 +1,4 @@
-package com.github.carlos.app.filter;
+package com.github.carlos.app.interceptor;
 
 import com.github.carlos.common.constant.CariosCodeEnum;
 import com.github.carlos.common.constant.ErrorLevelEnum;
