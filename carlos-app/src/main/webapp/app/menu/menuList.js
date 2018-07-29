@@ -4,9 +4,9 @@
 var pageCur = 1;
 var pageSize = 10;
 // 列表数据请求url
-var dataUrl = rootPath + "menu/list";
-var moduleUrl = rootPath + "menu/getModules";
-var deleteUrl = rootPath + "menu/del";
+var dataUrl = rootPath + "console/menu/list";
+var moduleUrl = rootPath + "console/menu/getModules";
+var deleteUrl = rootPath + "console/menu/del";
 
 var saveOrUpdateUrl = rootPath + "menu/saveOrUpdate";
 $(document).ready(function () {
@@ -95,7 +95,7 @@ function dataCallbackShow(data) {
     }
 
     // 总数
-    var total = data.data.iTotalDisplayRecords;
+    var total = data.data.totalDisplayRecords;
     var items = data.data.datas;
     var currentPage = pageCur;
     var rowTemplate = $("#template").children();

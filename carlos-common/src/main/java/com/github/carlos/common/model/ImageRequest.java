@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageRequest {
 
 
-    private MultipartFile file;
+    private Integer itemId;
+    private MultipartFile uploadFile;
 
 }

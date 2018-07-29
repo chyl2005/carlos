@@ -5,6 +5,7 @@ import com.github.carlos.common.constant.SysConstant;
 import com.github.carlos.common.model.User;
 import com.github.carlos.common.model.UserInfoCacheVo;
 import com.github.carlos.common.utils.CookieUtils;
+import com.github.carlos.common.utils.PageUtil;
 import com.github.carlos.common.utils.ThreadLocalContext;
 import com.github.carlos.common.utils.UserUtils;
 import com.github.carlos.service.Config;
@@ -48,23 +49,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         String startRow = request.getParameter("startRow");
         if (StringUtils.isNotBlank(startRow)) {
-            int start = Integer.parseInt(startRow);
-            ThreadLocalContext.set(SysConstant.START_ROW, start);
+            PageUtil.setStartRow(Integer.parseInt(startRow));
         }
         String ps = request.getParameter("pageSize");
         //请求中有传入pageSize
         if (StringUtils.isNotBlank(ps)) {
-            int pageSize = Integer.parseInt(ps);
-            request.getSession().setAttribute("pageSize", pageSize);
-            ThreadLocalContext.set(SysConstant.PAGE_SIZE, pageSize);
-        } else {//请求中没有传入pageSize
-            Integer pageSize = (Integer) request.getSession().getAttribute("pageSize");
-            //当session也没有
-            if (pageSize == null || pageSize.intValue() == 0) {
-                request.getSession().setAttribute("pageSize", 10);
-                pageSize = 10;
-                ThreadLocalContext.set(SysConstant.PAGE_SIZE, pageSize);
-            }
+            PageUtil.setPageSize(Integer.parseInt(ps));
         }
 
         User user = userInfoCache.getUser();

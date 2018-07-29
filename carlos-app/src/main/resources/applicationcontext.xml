@@ -13,8 +13,9 @@
     <!-- 启动对@Aspectj的支持 true为cglib，false为jdk代理，为true的话，会导致拦截不了mybatis的mapper-->
     <aop:aspectj-autoproxy proxy-target-class="false"/>
 
-    <context:component-scan base-package="com.github.carlos"/>
-
+    <context:component-scan base-package="com.github.carlos">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
 
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
@@ -32,5 +33,5 @@
     </bean>
 
     <import resource="mysql-datasource.xml"/>
-
+    <import resource="beans.xml"/>
 </beans>

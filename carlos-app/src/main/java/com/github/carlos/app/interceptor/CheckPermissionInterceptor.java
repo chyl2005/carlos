@@ -44,8 +44,7 @@ public class CheckPermissionInterceptor extends HandlerInterceptorAdapter {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             //Method method = handlerMethod.getMethod();
             // 方法名
-            //String methodName = method.getName();
-            RequestMapping requestMapping = handlerMethod.getBean().getClass().getAnnotation(RequestMapping.class);
+            RequestMapping requestMapping = handlerMethod.getMethod().getDeclaringClass().getAnnotation(RequestMapping.class);
             String[] actionPaths = requestMapping.value();
             // 当前请求 的controller requestMapping 中的值 也就是 Authority 表中 的 action_path
             String actionPath = actionPaths[0];
@@ -83,9 +82,7 @@ public class CheckPermissionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        MethodParameter returnType = handlerMethod.getReturnType();
-        Method method = handlerMethod.getMethod();
+
 
     }
 

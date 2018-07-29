@@ -31,18 +31,16 @@
         now(),
         now(),
         0)
-        on duplicate key update
-        <trim suffixOverrides=",">
-            item_id = VALUES(item_id),
-            image_id = VALUES(image_id),
-            is_del =0,
-            gmt_modified=now()
-        </trim>
+        ON DUPLICATE KEY UPDATE
+        item_id = VALUES(item_id),
+        image_id = VALUES(image_id),
+        is_del =0,
+        gmt_modified=now()
     </insert>
 
 
     <insert id="batchInsertOrUpdate" parameterType="list">
-        insert into item_info (<include refid="generalColumns"/>)
+        insert into item_image_rel (<include refid="generalColumns"/>)
         values
         <foreach collection="list" item="item" separator=",">
             (#{item.id},
@@ -56,18 +54,14 @@
         item_id=VALUES(item_id),
         image_id=VALUES(image_id),
         is_del =0,
-        gmt_modified=now(),
+        gmt_modified=now()
     </insert>
-
-
-
-
 
 
     <select id="selectByItemIds" resultMap="resultMap">
         select
         <include refid="generalColumns"/>
-        from item_info
+        from item_image_rel
         where is_del=0
         and item_id IN
         <foreach item="id" index="index" collection="itemIds" open="(" separator="," close=")">
@@ -75,17 +69,21 @@
         </foreach>
 
 
-
     </select>
 
 
-
-
     <update id="del">
-       update item_info set is_del=0
+       update item_image_rel set is_del=0
         where
          id = #{id}
 
+    </update>
+
+    <update id="delByItemIdAndImageId">
+       update item_image_rel set is_del=0
+        where
+         item_id = #{itemId}
+         and image_id = #{imageId}
     </update>
 
 

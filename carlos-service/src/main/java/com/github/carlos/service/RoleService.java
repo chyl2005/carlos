@@ -6,6 +6,7 @@ import com.github.carlos.common.model.AoData;
 import com.github.carlos.common.model.Menu;
 import com.github.carlos.common.model.QueryAuthorityParam;
 import com.github.carlos.common.model.QueryRoleParam;
+import com.github.carlos.common.utils.PageUtil;
 import com.github.carlos.common.utils.ThreadLocalContext;
 import com.github.carlos.dal.bean.AuthorityDO;
 import com.github.carlos.dal.bean.MenuDO;
@@ -43,8 +44,8 @@ public class RoleService {
      */
     public AoData getAllRoles() {
         QueryRoleParam roleParam = new QueryRoleParam();
-        roleParam.setPageSize(ThreadLocalContext.get(SysConstant.PAGE_SIZE));
-        roleParam.setStartRow(ThreadLocalContext.get(SysConstant.START_ROW));
+        roleParam.setPageSize(PageUtil.getPageSize());
+        roleParam.setStartRow(PageUtil.getStartRow());
         List<RoleDO> roleDOS = this.roleMapper.selecByParam(roleParam);
         Integer count = this.roleMapper.selecByCount(roleParam);
         AoData aoData = new AoData(count, roleDOS);

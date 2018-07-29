@@ -5,6 +5,8 @@
 
         <id column="id" property="id"/>
         <result column="category_name" property="categoryName"/>
+        <result column="description" property="description"/>
+        <result column="type" property="type"/>
 
         <result column="gmt_created" property="gmtCreated"/>
         <result column="gmt_modified" property="gmtModified"/>
@@ -14,6 +16,8 @@
     <sql id="generalColumns">
         id,
         category_name,
+        description,
+        `type`,
         gmt_created,
         gmt_modified,
         is_del
@@ -24,18 +28,34 @@
         insert into category (<include refid="generalColumns"/>)
 
         values (#{id},
-        #{category_name},
+        #{categoryName},
+        #{description},
+        {`type`},
         now(),
         now(),
         0)
         on duplicate key update
-        <trim suffixOverrides=",">
-            category_name = VALUES(category_name),
-            is_del =0,
-            gmt_modified=now()
-        </trim>
+        <if test="description!=null">
+            description=#{description},
+        </if>
+        <if test="categoryName!=null">
+            category_name=#{categoryName},
+        </if>
+        <if test="type!=null">
+            `type`=#{type},
+        </if>
+        is_del =0,
+        gmt_modified=now()
     </insert>
 
+    <select id="selectByParam" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from category
+        where is_del=0
+        and `type`=#{type}
+
+    </select>
 
 
     <select id="selectAll" resultMap="resultMap">
@@ -45,8 +65,6 @@
         where is_del=0
 
     </select>
-
-
 
 
     <update id="del">

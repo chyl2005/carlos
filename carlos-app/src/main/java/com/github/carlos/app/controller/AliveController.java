@@ -1,5 +1,6 @@
 package com.github.carlos.app.controller;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class AliveController {
 
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AliveController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AliveController.class);
 
 
     /**

@@ -38,14 +38,20 @@
         now(),
         0)
         on duplicate key update
-        <trim suffixOverrides=",">
-            category_id = VALUES(category_id),
-            item_name = VALUES(item_name),
-            item_num = VALUES(item_num),
-            cover_img = VALUES(cover_img),
-            is_del =0,
-            gmt_modified=now()
-        </trim>
+        <if test="categoryId!=null">
+             category_id=#{categoryId},
+        </if>
+        <if test="itemName!=null">
+             item_name=#{itemName},
+        </if>
+        <if test="itemNum!=null">
+             item_num=#{itemNum},
+        </if>
+        <if test="coverImg!=null">
+             cover_img=#{coverImg},
+        </if>
+        is_del =0,
+        gmt_modified=now()
     </insert>
 
     <select id="selectByParam" resultMap="resultMap">
@@ -53,7 +59,7 @@
         <include refid="generalColumns"/>
         from item_info
         where is_del=0
-        <if test="itemIds != null and !imageIds.isEmpty()">
+        <if test="itemIds != null and !itemIds.isEmpty()">
             and id IN
             <foreach item="id" index="index" collection="itemIds" open="(" separator="," close=")">
                 #{id}
@@ -70,14 +76,25 @@
 
     </select>
 
-    <select id="selectByCount" resultType="java.lang.Integer">
+    <select id="findById" resultMap="resultMap">
         select
         <include refid="generalColumns"/>
         from item_info
+        where id=#{id}
+
+    </select>
+
+
+
+
+    <select id="selectByCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from item_info
         where is_del=0
-        <if test="imageIds != null and !imageIds.isEmpty()">
+        <if test="itemIds != null and !itemIds.isEmpty()">
             and id IN
-            <foreach item="id" index="index" collection="imageIds" open="(" separator="," close=")">
+            <foreach item="id" index="index" collection="itemIds" open="(" separator="," close=")">
                 #{id}
             </foreach>
         </if>
@@ -92,6 +109,7 @@
          id = #{id}
 
     </update>
+
 
 
 </mapper>

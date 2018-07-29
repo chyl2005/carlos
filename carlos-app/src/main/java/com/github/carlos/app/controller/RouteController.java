@@ -1,7 +1,13 @@
 package com.github.carlos.app.controller;
 
+import com.github.carlos.common.model.WebResponse;
+import com.github.carlos.dal.bean.CategoryDO;
+import com.github.carlos.dal.mapper.CategoryMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @author: ylong.chen@qunar.com
@@ -11,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class RouteController {
-
 
     @RequestMapping("/index")
     public String index() {
@@ -47,4 +52,8 @@ public class RouteController {
 
         return "front/itemList";
     }
+
+
+
+
 }

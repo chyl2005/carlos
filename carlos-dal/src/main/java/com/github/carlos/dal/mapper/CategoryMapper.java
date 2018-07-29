@@ -21,6 +21,7 @@ public interface CategoryMapper {
 
     List<CategoryDO> selectAll();
 
+    List<CategoryDO> selectByParam(@Param("type") Integer type);
 
 
     Integer del(@Param("id") Integer id);

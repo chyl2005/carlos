@@ -1,7 +1,6 @@
 package com.github.carlos.common.model;
 
-import com.github.carlos.common.constant.SysConstant;
-import com.github.carlos.common.utils.ThreadLocalContext;
+import com.github.carlos.common.utils.PageUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,32 +19,32 @@ public class AoData<T> {
     /**
      * 起始索引
      */
-    private Integer iDisplayStart;
+    private Integer displayStart;
     /**
      * 每页显示的行数
      */
-    private Integer iDisplayLength;
+    private Integer displayLength;
     /**
      * 实际的行数
      */
-    private Integer iTotalRecords;
+    private Integer totalRecords;
     /**
      * 显示的行数,这个要和上面写的一样
      */
-    private Integer iTotalDisplayRecords;
+    private Integer totalDisplayRecords;
 
 
     private T datas;
 
 
     public AoData(Integer count, T datas) {
-        Integer startRow = ThreadLocalContext.get(SysConstant.START_ROW);
-        Integer pageSize = ThreadLocalContext.get(SysConstant.PAGE_SIZE);
-        this.datas=datas;
-        this.iDisplayStart=startRow;
-        this.iDisplayLength=pageSize;
-        this.iTotalRecords=count;
-        this.iTotalDisplayRecords=count;
+        Integer startRow = PageUtil.getStartRow();
+        Integer pageSize = PageUtil.getPageSize();
+        this.datas = datas;
+        this.displayStart = startRow;
+        this.displayLength = pageSize;
+        this.totalRecords = count;
+        this.totalDisplayRecords = count;
 
     }
 }

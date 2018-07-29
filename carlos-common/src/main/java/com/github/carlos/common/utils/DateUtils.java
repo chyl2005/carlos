@@ -34,6 +34,14 @@ public class DateUtils {
     private DateUtils() {
     }
 
+
+    public static String getDateformat(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_KEY_FORMAT);
+        String format = simpleDateFormat.format(date);
+        return format;
+    }
+
+
     public static String getDateformat(Date date, String pattern) {
         if (StringUtils.isBlank(pattern)) {
             pattern = YMD_HMS_FORMAT;

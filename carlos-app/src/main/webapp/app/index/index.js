@@ -93,7 +93,7 @@ function dataCallbackShow(data) {
     }
 
     // 总数
-    var total = data.data.iTotalDisplayRecords;
+    var total = data.data.totalDisplayRecords;
     var items = data.data.datas;
     var currentPage = pageCur;
     var rowTemplate = $("#template").children();

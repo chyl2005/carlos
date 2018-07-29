@@ -19,11 +19,9 @@ public interface SysConstant {
 
     String PARAMSMAP = "PARAMSMAP";
 
-    String START_ROW = "START_ROW";
-    String PAGE_SIZE = "PAGE_SIZE";
 
 
-
+    String REQUEST_METHOD = "REQUEST_METHOD";
 
 
 }

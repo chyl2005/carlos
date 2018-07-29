@@ -19,19 +19,20 @@ public class ItemConvertUtils {
 
 
     public static ItemInfoDO convertToItemInfoDO(final ItemRequest itemRequest) {
-
-
         ItemInfoDO itemInfoDO = new ItemInfoDO();
-
+        itemInfoDO.setItemName(itemRequest.getItemName());
+        itemInfoDO.setItemNum(itemRequest.getItemNum());
+        itemInfoDO.setCategoryId(itemRequest.getCategoryId());
         return itemInfoDO;
     }
 
 
     public static ItemDetailDO convertToItemDetailDO(final ItemRequest itemRequest, final Integer itemId) {
 
-
         ItemDetailDO itemDetailDO = new ItemDetailDO();
-
+        itemDetailDO.setItemId(itemId);
+        itemDetailDO.setDescription(itemRequest.getDescription());
+        itemDetailDO.setSpecial(itemRequest.getSpecial());
         return itemDetailDO;
     }
 

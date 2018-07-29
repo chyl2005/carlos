@@ -17,7 +17,10 @@ public class ItemRequest extends BaseObject {
 
     private String itemName;
 
-
+    /**
+     * 分类ID
+     */
+    private Integer categoryId;
     /**
      * 编号
      */

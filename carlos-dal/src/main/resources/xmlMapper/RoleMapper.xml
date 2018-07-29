@@ -60,7 +60,7 @@
 
     <select id="selecByCount" resultType="java.lang.Integer">
         select
-        <include refid="generalColumns"/>
+        count(*)
         from tb_role
         where 1=1
         <if test="roleIds != null and !roleIds.isEmpty()">

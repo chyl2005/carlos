@@ -28,7 +28,7 @@
         insert into item_detail (<include refid="generalColumns"/>)
 
         values (#{id},
-        #{item_id},
+        #{itemId},
         #{description},
         #{special},
         now(),
@@ -49,7 +49,7 @@
         <include refid="generalColumns"/>
         from item_detail
         where is_del=0
-        <if test="itemIds != null and !imageIds.isEmpty()">
+        <if test="itemIds != null and !itemIds.isEmpty()">
             and item_id IN
             <foreach item="id" index="index" collection="itemIds" open="(" separator="," close=")">
                 #{id}

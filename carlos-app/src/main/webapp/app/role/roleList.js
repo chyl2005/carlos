@@ -4,14 +4,14 @@
 var pageCur = 1;
 var pageSize = 10;
 // 列表数据请求url
-var dataUrl = rootPath + "role/list";
+var dataUrl = rootPath + "console/role/list";
 
 
-var saveAuthUrl = rootPath + "role/saveAuth";
-var roleModuleUrl = rootPath + "role/getAllModuleAuthority";
-var roleSaveOrUpdateUrl = rootPath + "role/saveOrUpdate";
+var saveAuthUrl = rootPath + "console/role/saveAuth";
+var roleModuleUrl = rootPath + "console/role/getAllModuleAuthority";
+var roleSaveOrUpdateUrl = rootPath + "console/role/saveOrUpdate";
 
-var deleteUrl = rootPath + "role/deleteEntity";
+var deleteUrl = rootPath + "console/role/deleteEntity";
 $(document).ready(function () {
 
     // 加载数据
@@ -56,7 +56,7 @@ function dataCallbackShow(data) {
         return;
     }
     // 总数
-    var total = data.data.iTotalDisplayRecords;
+    var total = data.data.totalDisplayRecords;
     var items = data.data.datas;
     var currentPage = pageCur;
     var rowTemplate = $("#template").children();

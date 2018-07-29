@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>产品管理-产品图片列表</title>
+    <meta name="description" content="overview &amp; stats"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <#include "/console/common/_header.html"/>
+</head>
+
+<body class="no-skin">
+
+<#include "/console/common/_navbar.html"/>
+<div class="main-container ace-save-state" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
+    </script>
+
+    <#include "/console/common/_sidebar.html"/>
+
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <!--breadcrumb start-->
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="active">Dashboard</li>
+                </ul><!-- /.breadcrumb end-->
+
+            </div>
+
+            <div class="page-content">
+                <#include "/console/common/_settings.html"/>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <#include "/console/common/_tips.html"/>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-flat">
+                                <h4 class="widget-title lighter">
+                                    <i class="ace-icon fa fa-star orange"></i>
+                                    上传图片
+                                </h4>
+
+                                <div class="widget-toolbar">
+                                    <a href="#" data-action="collapse">
+                                        <i class="ace-icon fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="widget-body setting" id="content">
+                                <div class="widget-main no-padding">
+                                    <div class="space-4"></div>
+
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">产品ID: </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" placeholder="产品ID" name="itemId" class="col-xs-10 col-sm-5" value="${itemId}" readonly>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">商品标题: </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" placeholder="商品标题" name="itemName" class="col-xs-10 col-sm-5" value="${itemName}" readonly>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">图片: </label>
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+                                                    <!--<div class="form-group">-->
+                                                    <!--<div class="col-xs-12">-->
+                                                    <!--<input type="file" id="id-input-file-2"/>-->
+                                                    <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                            <input multiple="" type="file" id="uploadFile" name="uploadFile" data=""/>
+                                                        </div>
+                                                    </div>
+
+                                                    <label>
+                                                        <input type="checkbox" name="file-format" id="file-format" class="ace"/>
+                                                        <span class="lbl"> Allow only images</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <div class="col-sm-10 center">
+                                                <button type="button" class="btn btn-primary" onclick="saveOrUpdate()">保存</button>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+
+                                </div><!-- /.widget-main -->
+                            </div><!-- /.widget-body -->
+                        </div><!-- /.widget-box -->
+
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+                <div class="space-4"></div>
+
+                <!-- 图片列表区域 -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="simple-table" class="table  table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="center">ID</th>
+                                <th class="center">名称</th>
+                                <th class="center">相对地址</th>
+                                <th class="center">
+                                    <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                    生成时间
+                                </th>
+                                <th class="center">
+                                    <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                    修改时间
+                                </th>
+                                <th class="center">是否删除</th>
+                                <th class="center">操作</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="lists">
+                            </tbody>
+
+                            <tbody id="template" style="display: none">
+                            <tr>
+                                <td class="center" id="imageId"></td>
+                                <td id="imageName" class="center"></td>
+                                <td id="originPath" class="center"></td>
+                                <td id="gmtCreated" class="center"></td>
+                                <td id="gmtModified" class="center"></td>
+                                <td class="center">
+                                    <label>
+                                        <input name="switch-field-1" id="isDel" class="ace ace-switch ace-switch-2" type="checkbox">
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td class="center">
+                                    <div class="hidden-sm hidden-xs btn-group">
+                                        <!--<button class="btn btn-xs btn-success">-->
+                                        <!--<i class="ace-icon fa fa-check bigger-120"></i>-->
+                                        <!--</button>-->
+
+                                        <button class="btn btn-xs btn-info">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </button>
+
+                                        <button class="btn btn-xs btn-danger">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </button>
+
+                                        <!--<button class="btn btn-xs btn-warning">-->
+                                        <!--<i class="ace-icon fa fa-flag bigger-120"></i>-->
+                                        <!--</button>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!--分页-->
+                    <div class="center">
+                        <ul id="page"></ul>
+                    </div>
+
+
+                </div>
+
+
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <#include "/console/common/_footer.html"/>
+</div><!-- /.main-container -->
+
+
+<script src="${base}/app/item/edit.js"></script>
+<script src="${base}/app/check.js"></script>
+<script src="${base}/static/js/ajaxFileUpload.js"></script>
+
+<script type="text/javascript">
+
+
+    $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+        no_file: 'No File ...',
+        btn_choose: 'Choose',
+        btn_change: 'Change',
+        droppable: false,
+        onchange: null,
+        thumbnail: false //| true | large
+        //whitelist:'gif|png|jpg|jpeg'
+        //blacklist:'exe|php'
+        //onchange:''
+        //
+    });
+    //pre-show a file name, for example a previously selected file
+    //$('#id-input-file-1').ace_file_input('show_file_list', ['myfile.txt'])
+
+
+    $('#uploadFile').ace_file_input({
+        style: 'well',
+        btn_choose: 'Drop files here or click to choose',
+        btn_change: null,
+        no_icon: 'ace-icon fa fa-cloud-upload',
+        droppable: true,
+        thumbnail: 'small'//large | fit
+        //,icon_remove:null//set null, to hide remove/reset button
+        /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+        /**,before_remove : function() {
+						return true;
+					}*/
+        ,
+        preview_error: function (filename, error_code) {
+            //name of the file that failed
+            //error_code values
+            //1 = 'FILE_LOAD_FAILED',
+            //2 = 'IMAGE_LOAD_FAILED',
+            //3 = 'THUMBNAIL_FAILED'
+            //alert(error_code);
+        }
+
+    }).on('change', function () {
+        //console.log($(this).data('ace_input_files'));
+        upload(this);
+    });
+
+
+    //$('#id-input-file-3')
+    //.ace_file_input('show_file_list', [
+    //{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
+    //{type: 'file', name: 'hello.txt'}
+    //]);
+
+
+    //dynamically change allowed formats by changing allowExt && allowMime function
+    $('#file-format').removeAttr('checked').on('change', function () {
+        var whitelist_ext, whitelist_mime;
+        var btn_choose
+        var no_icon
+        if (this.checked) {
+            btn_choose = "Drop images here or click to choose";
+            no_icon = "ace-icon fa fa-picture-o";
+
+            whitelist_ext = ["jpeg", "jpg", "png", "gif", "bmp"];
+            whitelist_mime = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"];
+        }
+        else {
+            btn_choose = "Drop files here or click to choose";
+            no_icon = "ace-icon fa fa-cloud-upload";
+
+            whitelist_ext = null;//all extensions are acceptable
+            whitelist_mime = null;//all mimes are acceptable
+        }
+        var file_input = $('#uploadFile');
+        file_input
+            .ace_file_input('update_settings',
+                {
+                    'btn_choose': btn_choose,
+                    'no_icon': no_icon,
+                    'allowExt': whitelist_ext,
+                    'allowMime': whitelist_mime
+                })
+        file_input.ace_file_input('reset_input');
+
+        file_input
+            .off('file.error.ace')
+            .on('file.error.ace', function (e, info) {
+                //console.log(info.file_count);//number of selected files
+                //console.log(info.invalid_count);//number of invalid files
+                //console.log(info.error_list);//a list of errors in the following format
+
+                //info.error_count['ext']
+                //info.error_count['mime']
+                //info.error_count['size']
+
+                //info.error_list['ext']  = [list of file names with invalid extension]
+                //info.error_list['mime'] = [list of file names with invalid mimetype]
+                //info.error_list['size'] = [list of file names with invalid size]
+
+
+                /**
+                 if( !info.dropped ) {
+							//perhapse reset file field if files have been selected, and there are invalid files among them
+							//when files are dropped, only valid files will be added to our file array
+							e.preventDefault();//it will rest input
+						}
+                 */
+
+
+                //if files have been selected (not dropped), you can choose to reset input
+                //because browser keeps all selected files anyway and this cannot be changed
+                //we can only reset file field to become empty again
+                //on any case you still should check files with your server side script
+                //because any arbitrary file can be uploaded by user and it's not safe to rely on browser-side measures
+            });
+
+
+        /**
+         file_input
+         .off('file.preview.ace')
+         .on('file.preview.ace', function(e, info) {
+						console.log(info.file.width);
+						console.log(info.file.height);
+						e.preventDefault();//to prevent preview
+					});
+         */
+
+    });
+
+
+</script>
+</body>
+</html>

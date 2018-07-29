@@ -19,7 +19,10 @@ public class CategoryDO {
 
 
     private String categoryName;
+    private String description;
 
+
+    private Integer type;
     private Date gmtCreated;
 
     private Date gmtModified;

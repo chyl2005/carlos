@@ -26,4 +26,6 @@ public interface ItemImageRelMapper {
 
 
     Integer del(@Param("id") Integer id);
+
+    Integer delByItemIdAndImageId(@Param("itemId")Integer itemId,@Param("imageId")Integer imageId);
 }

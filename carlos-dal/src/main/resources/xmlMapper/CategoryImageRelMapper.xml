@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.carlos.dal.mapper.CategoryImageRelMapper">
+    <resultMap id="resultMap" type="com.github.carlos.dal.bean.CategoryImageRelDO">
+
+        <id column="id" property="id"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="image_id" property="imageId"/>
+
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="is_del" property="isDel"/>
+    </resultMap>
+
+    <sql id="generalColumns">
+        id,
+        category_id,
+        image_id,
+        gmt_created,
+        gmt_modified,
+        is_del
+
+    </sql>
+
+    <insert id="insertOrUpdate" useGeneratedKeys="true" keyProperty="id">
+        insert into category_image_rel (<include refid="generalColumns"/>)
+
+        values (#{id},
+        #{category_id},
+        #{image_id},
+        now(),
+        now(),
+        0)
+        ON DUPLICATE KEY UPDATE
+        image_id = VALUES(image_id),
+        category_id = VALUES(category_id),
+        is_del =0,
+        gmt_modified=now()
+    </insert>
+
+
+    <insert id="batchInsertOrUpdate" parameterType="list">
+        insert into category_image_rel (<include refid="generalColumns"/>)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},
+            #{item.categoryId},
+            #{item.imageId},
+            now(),
+            now(),
+            0)
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        image_id=VALUES(image_id),
+        category_id=VALUES(category_id),
+        is_del =0,
+        gmt_modified=now()
+    </insert>
+
+
+    <select id="selectByParam" resultMap="resultMap">
+        select
+        <include refid="generalColumns"/>
+        from category_image_rel
+        where is_del=0
+        and category_id IN
+        <foreach item="id" index="index" collection="categoryIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </select>
+
+
+
+    <update id="del">
+       update category_image_rel set is_del=0
+        where
+         category_id = #{categoryId}
+         and image_id = #{imageId}
+    </update>
+
+
+</mapper>

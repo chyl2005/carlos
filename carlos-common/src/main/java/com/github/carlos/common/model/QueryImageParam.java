@@ -10,11 +10,12 @@ import java.util.List;
  * @description: TODO
  */
 @Data
-public class QueryImageParam extends PageParam{
+public class QueryImageParam extends PageParam {
 
 
     private List<Integer> imageIds;
 
+    private Integer isDel;
 
 
 }
